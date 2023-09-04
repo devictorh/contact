@@ -6,3 +6,5 @@ django-admin startproject project .
 # Executar o projeto
 
 py manager.py runserver
+
+# git commands

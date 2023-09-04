@@ -7,4 +7,8 @@ django-admin startproject project .
 
 py manager.py runserver
 
+# Criando um app
+
+py manager.py startapp contact
+
 # git commands

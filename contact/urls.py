@@ -2,10 +2,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 
-from contact.views import index
+from contact import views
+
+app_name = 'contact'
 
 urlpatterns = [
-    path('', index, name='index'),
+    path('<int:contact_id>/', views.contact, name='contact'),
+    path('', views.index, name='index'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

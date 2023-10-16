@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 
@@ -9,9 +10,14 @@ def index(request):
                       .filter(show=True) \
                       .order_by('-id')  # to slice use [:10]
 
+    paginator = Paginator(contacts, 10)  # Show 25 contacts per page.
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
     # print(contacts.query)
     context = {
-        'contacts': contacts,
+        'page_obj': page_obj,
         'site_title': 'Contatos - '
     }
     return render(
@@ -34,9 +40,12 @@ def search(request):
             ) \
             .order_by('first_name')  # to slice use [:10]
 
-    # print(contacts.query)
+    paginator = Paginator(contacts, 10)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
     context = {
-        'contacts': contacts,
+        'page_obj': page_obj,
         'site_title': 'Search - '
     }
     return render(

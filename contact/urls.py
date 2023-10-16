@@ -6,10 +6,13 @@ from contact import views
 
 app_name = 'contact'
 
-urlpatterns = [
-    path('<int:contact_id>/', views.contact, name='contact'),
+urlpatterns = [    
     path('search/', views.search, name='search'),
     path('', views.index, name='index'),
+
+    # contact 
+    path('contact/<int:contact_id>/', views.contact, name='contact'),
+    path('contact/create/', views.create, name='create')
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
